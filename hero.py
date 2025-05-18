@@ -7,6 +7,7 @@ class Hero():
         self.hero.setColor(ORANGE_05)
         self.hero.setPos(pos)
         self.camera_on = True
+        self.mode = True
         self.step = 5
         self.camera_bind()
         self.accept_eventes()
@@ -30,6 +31,12 @@ class Hero():
             self.camera_up()
         else:
             self.camera_bind()
+    
+    def change_mode(self):
+        if self.mode:
+            self.mode = False
+        else:
+            self.mode = True
 
     def tern_right(self):
         self.hero.setH((self.hero.getH() - self.step)%360)
@@ -56,8 +63,8 @@ class Hero():
             return (-1, 1)
         else:
             return(0, -1)
-
-    def look_at(self):
+    
+    def look_at(self, angle):
         x = round(self.hero.getX())
         y = round(self.hero.getY())
         z = round(self.hero.getZ())
@@ -70,3 +77,57 @@ class Hero():
         base.accept(VIEW, self.change_view)
         base.accept(TERN_RIGHT, self.tern_right)
         base.accept(TERN_LEFT, self.tern_left)
+        base.accept(K_LEFT, self.come_left)
+        base.accept(K_RIGHT, self.come_right)
+        base.accept(K_FORWARD, self.come_forward)
+        base.accept(K_BACK, self.come_back)
+        base.accept(KEY_UP, self.up)
+        base.accept(KEY_DOWN, self.down)
+        base.accept(K_MODE, self.change_mode)
+        
+
+        
+    
+    def just_move(self, angle):
+        pos = self.look_at(angle)
+        self.hero.setPos(pos) 
+    def try_move(self, angle):
+        pass
+    def move_to(self, angle):
+        if self.mode:
+            self.just_move(angle)
+        else:
+            self.try_move(angle)
+    def come_back(self):
+        angle = (self.hero.getH() + 180) % 360
+        self.move_to(angle)
+    def come_forward(self):
+        angle = (self.hero.getH()) % 360
+        self.move_to(angle)
+    def come_left(self):
+        angle = (self.hero.getH() + 90) % 360
+        self.move_to(angle)
+    def come_right(self):
+        angle = (self.hero.getH() - 90) % 360
+        self.move_to(angle)
+    def up(self):
+        self.hero.setZ(self.hero.getZ() + 1)            
+    def down(self):
+        self.hero.setZ(self.hero.getZ() - 1)
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        
+        

@@ -21,7 +21,7 @@ class Game(ShowBase):
         # self.model1.setTexture(self.texture)
         # self.model.reparentTo(render)
         # self.model.setScale(0.25)
-        # self.model.setPos(-2, 25, -3)
+        # self.model.setPos(-2, 25, -3)a
         # self.model1.setScale(0.1)
         # self.model1.setPos(2, 10, 3)
         # self.pandaActor = Actor("models/panda-model",
