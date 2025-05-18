@@ -1,0 +1,10 @@
+BLACK = (0, 0, 0, 1)
+WHITE = (1, 1, 1, 1)
+BLACK_05 = (0, 0, 0, 0.5)
+WHITE_05 = (1, 1, 1, 0.5)
+RED_05 = (1, 0, 0, 0.5)
+ORANGE_05 = (1, 0.5, 0, 0.5)
+FILE_NAME = 'files/my_file.txt'
+VIEW = 'q'
+TERN_RIGHT = 'r'
+TERN_LEFT = 'l'
