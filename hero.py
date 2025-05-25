@@ -2,6 +2,7 @@ from const import *
 class Hero():
     def __init__(self, pos, land):
         self.hero = loader.loadModel('smiley')
+        self.land = land
         self.hero.reparentTo(land)
         self.hero.setScale(1)
         self.hero.setColor(ORANGE_05)
@@ -91,8 +92,6 @@ class Hero():
     def just_move(self, angle):
         pos = self.look_at(angle)
         self.hero.setPos(pos) 
-    def try_move(self, angle):
-        pass
     def move_to(self, angle):
         if self.mode:
             self.just_move(angle)
@@ -114,6 +113,16 @@ class Hero():
         self.hero.setZ(self.hero.getZ() + 1)            
     def down(self):
         self.hero.setZ(self.hero.getZ() - 1)
+    def try_move(self, angle):
+        pos = self.look_at(angle)
+        print(pos)
+        if self.land.isEmpty(pos):
+            pos = self.land.find_highest_empty(pos)
+            self.hero.setPos(pos)
+        else:
+            pos = pos[0], pos[1], pos[2] + 1
+            if self.land.isEmpty(pos):
+                self.hero.setPos(pos)
             
             
             

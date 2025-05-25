@@ -6,12 +6,12 @@ from hero import Hero
 class Game(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
-        manager = MapManager('models/block.egg','images/block.png')
+        manager = MapManager('models/block.egg','images/block.png', scale = 1)
         # manager = MapManager('models/Sailboat.egg','tekstures/SailTexture.tif')r
         manager.start_new()
         manager.load_land('files/land.txt')
-        manager.load_land('files/land2.txt')
-        hero = Hero((0, 0, 0.1), manager.land)
+        x,y = manager.load_land('files/land.txt')
+        hero = Hero((x / 2, y / 2, 0.1), manager.land)
         # self.model = loader.loadModel('models/Sailboat.egg')
         # self.model1 = loader.loadModel('models/Boeing707.egg')
         # self.model1.reparentTo(render)
@@ -28,7 +28,7 @@ class Game(ShowBase):
         #                         {"walk": "models/panda-walk4"})
         # self.pandaActor.setScale(0.05, 0.05, 0.05)
         # self.pandaActor.setPos(0,0,1)
-        # self.pandaActor.reparentTo(self.render)
+        # self.pandaActor.reparentTo(self.render)aa
         # # Loop its animation.
         # self.pandaActor.loop("walk")
 

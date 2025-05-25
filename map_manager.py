@@ -14,6 +14,7 @@ class MapManager():
         self.block.setScale(self.scale)
         self.block.setColor(self.color)
         self.block.setPos(pos)
+        self.block.setTag('at', str(pos))
     def start_new(self):
         self.land = render.attachNewNode('Land')
     def set_color(self, color):
@@ -37,3 +38,18 @@ class MapManager():
                         self.add_block((x, y, z * self.scale))
                     x += self.scale
                 y += self.scale
+            return x, y
+    def isEmpty(self, pos):
+        blocks =self.find_blocks(pos)
+        if blocks:
+            return False
+        else:
+            return True
+    def findblocks(self, pos):
+        return self.land.findAllMatches('=at' + str(pos))
+    def find_highest_empty(self, pos):
+        x, y, z = pos
+        z = 1
+        while not self.isEmpty((x, y, z)):
+            z += 1
+        return (x, y, z)
