@@ -11,7 +11,7 @@ class Game(ShowBase):
         manager.start_new()
         manager.load_land('files/land.txt')
         x,y = manager.load_land('files/land.txt')
-        hero = Hero((x / 2, y / 2, 0.1), manager.land)
+        hero = Hero((x / 2, y / 2, 0.1), manager.land, manager)
         # self.model = loader.loadModel('models/Sailboat.egg')
         # self.model1 = loader.loadModel('models/Boeing707.egg')
         # self.model1.reparentTo(render)
@@ -28,8 +28,7 @@ class Game(ShowBase):
         #                         {"walk": "models/panda-walk4"})
         # self.pandaActor.setScale(0.05, 0.05, 0.05)
         # self.pandaActor.setPos(0,0,1)
-        # self.pandaActor.reparentTo(self.render)aa
-        # # Loop its animation.
+        # self.pandaActor.reparentTo(self.render)aa        # # Loop its animation.
         # self.pandaActor.loop("walk")
 
         base.camLens.setFov(90)

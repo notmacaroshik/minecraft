@@ -1,5 +1,6 @@
 from const import *
 from random import *
+import pickle
 class MapManager():
     def __init__(self, model, texture, scale = 0.1, color = RED_05):
         self.model = model
@@ -7,6 +8,7 @@ class MapManager():
         self.scale = scale
         self.color = color
     def add_block(self, pos):
+        # print(pos)
         self.block = loader.loadModel(self.model)
         self.texture = loader.loadTexture(self.texture_image)
         self.block.setTexture(self.texture)
@@ -53,3 +55,36 @@ class MapManager():
         while not self.isEmpty((x, y, z)):
             z += 1
         return (x, y, z)
+    def del_block(self, pos):
+        block = self.findblocks(pos)
+        print(pos)
+        for block in block:
+            block.removeNode()
+    def del_block_from(self, pos):
+        x, y, z = self.find_highest_empty(pos)
+        pos = x, y, z
+        print(pos)
+        blocks = self.findblocks(pos)
+        for block in blocks:
+            block.removeNode()
+    def build_block(self, pos):
+        x, y, z = pos
+        print(pos)
+        new = self.find_highest_empty(pos)
+        if new[2] <= z + 1:
+            self.add_block(new)
+    def save_map(self):
+        blocks = self.land.getChildren()
+        with open('my_map.dat', 'wb') as file:
+            pickle.dump(len(blocks), file)
+            for block in blocks:
+                x, y, z = block.getPos()
+                pos = x, y, z
+                pickle.dump(pos, file)
+    def load_map(self):
+        self.clear()
+        with open('my_map.dat', 'rb') as file:
+            length = pickle.load(file)
+            for i in range(length):
+                pos = pickle.load(file)
+                self.add_block(pos)
